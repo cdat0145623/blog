@@ -1,0 +1,58 @@
+.topBar {
+    width: 100%;
+    height: 50px;
+    background-color: aqua;
+    position: sticky;
+    top: 0;
+    font-size: 1.6rem;
+    font-family: var(--font-family-JosefinSans);
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.topBar-left, .topBar-right {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topBar-icon {
+    font-size: 2rem;
+    margin-right: 10px;
+    color: #444;
+    cursor: pointer;
+}
+
+.topBar-center {
+    flex: 6;
+}
+
+.topBar-list {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+
+.topBar-item {
+    margin-right: 20px;
+    font-size: 1.8rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+
+.topBar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.topBar-search-icon {
+    color: #666;
+    font-size: 1.8rem;
+    margin-left: 15px;
+    cursor: pointer;
+}
