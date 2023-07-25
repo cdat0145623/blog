@@ -1,0 +1,67 @@
+.register {
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('https://img.freepik.com/free-photo/flat-lay-notebook-with-list-desk_23-2148938726.jpg?w=1480&t=st=1690318200~exp=1690318800~hmac=f5fee09f9850c74b986b33d67dea23ed56db931f139bdd909820bf6b1b235ddb');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.title {
+    font-size: 5rem;
+}
+
+.form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    margin: 10px 0;
+    font-size: 1.6rem;
+}
+
+.form-input {
+    min-width: 250px;
+    padding: 10px;
+    border: none;
+    background-color: #fff;
+}
+
+.form-input:focus {
+    outline-color: teal;
+}
+
+.btn-register {
+    margin-top: 20px;
+    font-size: 1.8rem;
+    background-color: teal;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 4px;
+}
+
+.btn-login {
+    font-size: 1.8rem;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: var(--primary);
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    color: #fff;
+    border-radius: 10px;
+}
+
+
+
+.btn-register:hover {
+    background-color: rgb(1, 114, 114);
+}
