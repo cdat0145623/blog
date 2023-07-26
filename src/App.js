@@ -1,15 +1,18 @@
 import Topbar from './components/Topbar/Topbar';
-// import Home from './pages/Home';
-// import Single from './pages/Single/Single';
-// import Write from './pages/Write/Write';
-// import Settings from './pages/Settings/Settings';
-import Login from './pages/Login/Login';
-import Register from './pages/Register/Register';
+import { publicRoutes } from './routes';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
     return (
         <>
-            <Topbar />
-            <Register />
+            <Router>
+                <Topbar />
+                <Routes>
+                    {publicRoutes.map((route, index) => {
+                        const Page = route.component;
+                        return <Route key={index} path={route.path} element={<Page />} />;
+                    })}
+                </Routes>
+            </Router>
         </>
     );
 }

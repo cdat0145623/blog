@@ -1,5 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
+import { Link } from 'react-router-dom';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -18,7 +20,11 @@ function Login() {
                 <input className={cx('form-input')} type="password" placeholder="******" id="loginPassword" />
                 <button className={cx('btn-login')}>Login</button>
             </form>
-            <button className={cx('btn-register')}>Register</button>
+            <button className={cx('btn-register')}>
+                <Link className={cx('link')} to={config.routes.register}>
+                    Register
+                </Link>
+            </button>
         </div>
     );
 }

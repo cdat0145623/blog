@@ -43,10 +43,11 @@
     color: #fff;
     cursor: pointer;
     border-radius: 10px;
-    padding: 4px;
+    padding: 10px;
 }
 
 .btn-register {
+    font-size: 1.8rem;
     position: absolute;
     top: 60px;
     right: 20px;
@@ -57,7 +58,10 @@
     color: #fff;
     border-radius: 10px;
 }
-
+.link {
+    text-decoration: none;
+    color: inherit;
+}
 .btn-register:hover {
     background-color: rgb(1, 114, 114);
 }
