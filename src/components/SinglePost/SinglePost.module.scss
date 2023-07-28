@@ -5,6 +5,8 @@
 .wrapper {
     padding: 20px;
     padding-right: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .image {
@@ -19,6 +21,19 @@
     text-align: center;
     font-family: var(--font-family-Lora);
     font-size: 2.8rem;
+}
+
+.title-input {
+    margin: 10px;
+    text-align: center;
+    font-family: var(--font-family-Lora);
+    font-size: 2.8rem;
+    border: none;
+    border-bottom: 1px solid lightgray;
+}
+
+.title-input:focus {
+    outline: none;
 }
 
 .edit {
@@ -53,6 +68,11 @@
 
 }
 
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .date {
 
 }
@@ -63,8 +83,32 @@
     line-height: 2.5rem;
 }
 
+.description-input {
+    font-size: 1.8rem;
+    color: #666;
+    line-height: 2.5rem;
+    border: none;
+}
+
+.description-input:focus {
+    outline: none;
+}
+
 .description::first-letter {
     margin-left: 20px;
     font-size: 3rem;
     font-weight: 600;
+}
+
+.btn-update {
+    width: 100px;
+    padding: 8px;
+    color: #fff;
+    background-color: teal;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.6rem;
+    align-self: flex-end;
+    margin-top: 20px;
 }

@@ -7,10 +7,22 @@ import {
     faSquarePinterest,
     faSquareTwitter,
 } from '@fortawesome/free-brands-svg-icons';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function Sidebar() {
+    const [cats, setCat] = useState([]);
+
+    useEffect(() => {
+        const getCats = async () => {
+            const res = await axios.get('/categories');
+            setCat(res.data);
+        };
+        getCats();
+    }, []);
     return (
         <div className={cx('sidebar')}>
             <div className={cx('sidebar-item')}>
@@ -28,12 +40,13 @@ function Sidebar() {
             <div className={cx('sidebar-item')}>
                 <span className={cx('sidebar-title')}>CATEGORIES</span>
                 <ul className={cx('sidebar-list')}>
-                    <li className={cx('sidebar-list-item')}>Life</li>
-                    <li className={cx('sidebar-list-item')}>Music</li>
-                    <li className={cx('sidebar-list-item')}>Style</li>
-                    <li className={cx('sidebar-list-item')}>Sport</li>
-                    <li className={cx('sidebar-list-item')}>Tech</li>
-                    <li className={cx('sidebar-list-item')}>Cinema</li>
+                    {cats.map((c, index) => (
+                        <Link to={`/?cat=${c.name}`} key={index} className={cx('link')}>
+                            <li className={cx('sidebar-list-item')} key={index}>
+                                {c.name}
+                            </li>
+                        </Link>
+                    ))}
                 </ul>
             </div>
 

@@ -94,3 +94,10 @@
 .btn-update:hover {
     background-color: rgb(1, 114, 114);
 }
+
+.success-message {
+    color: var(--top-bar-color);
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.6rem;
+}

@@ -4,15 +4,12 @@ import Post from '../Post/Post';
 
 const cx = classNames.bind(styles);
 
-function Posts() {
+function Posts({ posts }) {
     return (
         <div className={cx('posts')}>
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+            {posts.map((p, index) => (
+                <Post post={p} key={index} />
+            ))}
         </div>
     );
 }

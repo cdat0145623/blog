@@ -1,28 +1,28 @@
 import classNames from 'classnames/bind';
 import styles from './Post.module.scss';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function Post() {
+function Post({ post }) {
+    const publicFolder = 'http://localhost:3001/images/';
     return (
         <div className={cx('post')}>
-            <img className={cx('post-img')} src="https://wallpaperset.com/w/full/1/e/6/120854.jpg" alt="" />
+            {post.photo && <img className={cx('post-img')} src={publicFolder + post.photo} alt="" />}
             <div className={cx('post-info')}>
                 <div className={cx('post-cats')}>
-                    <span className={cx('post-cat')}>Music</span>
-                    <span className={cx('post-cat')}>Life</span>
+                    {post.categories.map((c, index) => (
+                        <span className={cx('post-cat')} key={index}>
+                            {c.name}
+                        </span>
+                    ))}
                 </div>
-                <span className={cx('post-title')}>Contrary to popular belief</span>
+                <Link to={`/post/${post._id}`} className={cx('link')}>
+                    <span className={cx('post-title')}>{post.title}</span>
+                </Link>
                 <hr />
-                <span className={cx('post-date')}>1 hour ago</span>
-                <p className={cx('post-description')}>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </p>
+                <span className={cx('post-date')}>{new Date(post.createdAt).toDateString()}</span>
+                <p className={cx('post-description')}>{post.description}</p>
             </div>
         </div>
     );
