@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema(
     },
     profilePic: {
       type: String,
-      default: "",
+      default: "default.jpeg",
     },
   },
   { timestamps: true }
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema(
 
 UserSchema.pre("save", async function (next) {
   try {
-    const salt = await bcrypt.genSalt();
+    const salt = await bcrypt.genSalt(12);
     const hashPassword = await bcrypt.hash(this.password, salt);
     this.password = hashPassword;
   } catch (error) {

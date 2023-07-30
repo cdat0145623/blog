@@ -6,6 +6,7 @@ dotenv.config();
 const AuthRoute = require("./routes/auth");
 const UserRoute = require("./routes/user");
 const PostRoute = require("./routes/post");
+const createError = require("http-errors");
 const CategoryRoute = require("./routes/category");
 const multer = require("multer");
 const path = require("path");
@@ -40,6 +41,17 @@ app.use("/api/auth", AuthRoute);
 app.use("/api/users", UserRoute);
 app.use("/api/posts", PostRoute);
 app.use("/api/categories", CategoryRoute);
+
+app.use((req, res, next) => {
+  next(createError.NotFound("Route not found"));
+});
+
+app.use((err, req, res, next) => {
+  res.json({
+    status: err.status || 500,
+    message: err.message,
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);

@@ -43,7 +43,9 @@ router.post("/login", async (req, res, next) => {
       throw createError.Unauthorized("Password is incorrect");
     }
 
-    res.status(200).json({ user });
+    const { password, ...others } = user._doc;
+
+    res.status(200).json({ user: others });
   } catch (error) {
     next(error);
   }

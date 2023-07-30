@@ -16,12 +16,13 @@ router.put("/:id", async (req, res, next) => {
           $set: req.body,
         },
         {
-          runValidators: true,
+          runValidators: false,
           new: true,
         }
       );
-      await updatedUser.save();
-      return res.status(200).json(updatedUser);
+      // await updatedUser.save();
+      const { password, ...others } = updatedUser._doc;
+      return res.status(200).json({ user: others });
     }
   } catch (error) {
     res.status(500).json(error);
@@ -49,7 +50,6 @@ router.delete("/:id", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);
-
     if (!user) {
       res.status(404).json("User not found");
     }
