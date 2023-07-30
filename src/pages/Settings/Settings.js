@@ -3,7 +3,7 @@ import styles from './Setting.module.scss';
 import Sidebar from '~/components/Sidebar/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Context } from '~/context/Context';
 import axios from 'axios';
 
@@ -13,12 +13,40 @@ function Settings() {
     const [file, setFile] = useState(null);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    // const [password, setPassword] = useState('');
     const [success, setSuccess] = useState(false);
+    const [button, setButton] = useState(true);
     const { user, dispatch } = useContext(Context);
+    const imageRef = useRef();
     const publicFolder = 'http://localhost:3001/images/';
 
-    console.log(user);
+    useEffect(
+        () => {
+            const getUser = async () => {
+                const res = await axios.get(`/users/${user.user._id}`);
+                setUsername(res.data.username);
+                setEmail(res.data.email);
+            };
+            getUser();
+        },
+        // eslint-disable-next-line
+        [],
+    );
+
+    const handleImage = (e) => {
+        console.log(imageRef.current.files[0]);
+        setButton(false);
+    };
+
+    const handleUsername = (e) => {
+        setUsername(e.target.value);
+        setButton(false);
+    };
+
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+        setButton(false);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,7 +55,6 @@ function Settings() {
             userId: user.user._id,
             username,
             email,
-            password,
         };
         if (file) {
             const data = new FormData();
@@ -43,6 +70,8 @@ function Settings() {
             const res = await axios.put(`/users/${user.user._id}`, userUpdated);
             setSuccess(true);
             dispatch({ type: 'UPDATE_SUCCESS', payload: res.data });
+            window.location.reload();
+            setButton(false);
         } catch (error) {
             dispatch({ type: 'UPDATE_FAILURE' });
         }
@@ -66,10 +95,12 @@ function Settings() {
                             <FontAwesomeIcon icon={faCircleUser} className={cx('icon')} />
                         </label>
                         <input
+                            ref={imageRef}
                             type="file"
                             id="fileInput"
                             style={{ display: 'none' }}
                             onChange={(e) => setFile(e.target.files[0])}
+                            onInput={handleImage}
                         />
                     </div>
 
@@ -77,33 +108,28 @@ function Settings() {
                         Username
                     </label>
                     <input
+                        value={username}
                         type="text"
-                        placeholder="Username"
                         id="username"
                         className={cx('form-input')}
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={handleUsername}
                     />
                     <label className={cx('form-title')} htmlFor="email">
                         Email
                     </label>
-                    <input
-                        type="email"
-                        placeholder="safak@gmail.com"
-                        id="email"
-                        className={cx('form-input')}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <label className={cx('form-title')} htmlFor="password">
+                    <input value={email} type="email" id="email" className={cx('form-input')} onChange={handleEmail} />
+                    {/* <label className={cx('form-title')} htmlFor="password">
                         Password
                     </label>
                     <input
+                        value={password}
                         type="password"
                         placeholder="Password"
                         id="password"
                         className={cx('form-input')}
                         onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <button className={cx('btn-update')} type="submit">
+                    /> */}
+                    <button className={cx('btn-update')} type="submit" disabled={button}>
                         Update
                     </button>
                     {success && <span className={cx('success-message')}>Profile has been updated...</span>}

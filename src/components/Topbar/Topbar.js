@@ -17,8 +17,9 @@ const cx = classNames.bind(styles);
 
 function Topbar() {
     const { user, dispatch } = useContext(Context);
-    console.log(user);
     const publicFolder = 'http://localhost:3001/images/';
+
+    console.log(user);
 
     const handleLogout = () => {
         dispatch({ type: 'LOGOUT' });

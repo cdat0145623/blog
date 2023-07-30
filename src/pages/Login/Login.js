@@ -1,7 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
-import { Link } from 'react-router-dom';
-import config from '~/config';
 import axios from 'axios';
 import { useContext, useRef } from 'react';
 import { Context } from '~/context/Context';
@@ -55,11 +53,11 @@ function Login() {
                     Login
                 </button>
             </form>
-            <button className={cx('btn-register')}>
+            {/* <button className={cx('btn-register')}>
                 <Link className={cx('link')} to={config.routes.register}>
                     Register
                 </Link>
-            </button>
+            </button> */}
         </div>
     );
 }

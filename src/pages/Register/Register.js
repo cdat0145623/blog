@@ -1,7 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './Register.module.scss';
-import { Link } from 'react-router-dom';
-import config from '~/config';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -66,11 +64,11 @@ function Register() {
                     Register
                 </button>
             </form>
-            <button className={cx('btn-login')}>
+            {/* <button className={cx('btn-login')}>
                 <Link className={cx('link')} to={config.routes.login}>
                     Login
                 </Link>
-            </button>
+            </button> */}
             {error && <p className={cx('error-message')}>Some thing went wrong</p>}
         </div>
     );

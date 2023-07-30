@@ -84,15 +84,19 @@
     border: none;
     border-radius: 10px;
     color: #fff;
-    background-color: teal;
+    background-color: var(--top-bar-color);
     padding: 12px;
     margin-top: 20px;
     font-size: 1.4rem;
     cursor: pointer;
-}
-
-.btn-update:hover {
-    background-color: rgb(1, 114, 114);
+    &:disabled {
+        user-select: none;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+    &:hover {
+        background-color: var(--button-hover);
+    }
 }
 
 .success-message {
