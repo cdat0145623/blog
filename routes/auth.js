@@ -4,19 +4,23 @@ const createError = require("http-errors");
 
 router.post("/register", async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, confirmPassword } = req.body;
 
     if (!username || !email || !password) {
-      throw createError.BadRequest();
+      return res
+        .status(401)
+        .json(`${username}, ${email}, ${password} have to exist`);
     }
 
     const isUser = await User.findOne({ username });
     const isEmail = await User.findOne({ email });
 
     if (isUser || isEmail) {
-      throw createError.Conflict(
-        `${username} or ${email} is ready been registered`
-      );
+      return res.status(401).json(`${username} or ${email} is exist`);
+    }
+
+    if (password !== confirmPassword) {
+      throw createError.Unauthorized("Password don't match!");
     }
 
     const newUser = await User.create({
