@@ -1,0 +1,32 @@
+.form-input {
+    min-width: 250px;
+    padding: 12px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    background-color: #fff;
+    &:invalid[focused="true"] {
+        border: 1px solid var(--primary);
+    }
+}
+
+.form-input:invalid[focused="true"] + .error-message {
+    display: block;
+}
+
+
+.form-input:focus {
+    outline-color: teal;
+}
+
+.form-label {
+    margin: 12px 0;
+    font-size: 1.6rem;
+    color: gray;
+}
+
+.error-message {
+    font-size: 1.3rem;
+    padding: 3px;
+    color: var(--primary);
+    display: none;
+}
